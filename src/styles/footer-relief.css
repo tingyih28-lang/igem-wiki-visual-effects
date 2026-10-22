@@ -1,0 +1,129 @@
+/* Scoped above legacy home/wiki inverted-footer rules, including their !important colors. */
+html[data-theme] body footer#wiki-footer.wiki-footer.wiki-footer--relief {
+  --relief-ink: #26372f;
+  --relief-muted: #4d5a50;
+  --relief-accent: #07664e;
+  --relief-paper: 237, 234, 225;
+  --relief-line: rgba(42, 57, 46, .22);
+  background: rgb(var(--relief-paper)) !important;
+  color: var(--relief-ink);
+  border: 1px solid var(--relief-line) !important;
+  padding-top: clamp(3rem, 6vw, 6rem);
+  box-shadow: 0 18px 60px #00000012;
+}
+html[data-theme="dark"] body footer#wiki-footer.wiki-footer.wiki-footer--relief {
+  --relief-ink: #f3f1e9;
+  --relief-muted: #d0d3cb;
+  --relief-accent: #8bdfbd;
+  --relief-paper: 24, 27, 26;
+  --relief-line: rgba(232, 238, 226, .24);
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief::before,
+html[data-theme] body footer#wiki-footer.wiki-footer--relief::after { display: none; }
+.wiki-footer__relief {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+.wiki-footer__relief-still {
+  position: absolute;
+  inset: 0;
+  background: var(--relief-light) center / contain no-repeat;
+}
+html[data-theme="dark"] .wiki-footer__relief-still {
+  /* Same pixel positions as ivory, matching the shader's luminance*.4-.125. */
+  filter: grayscale(1) brightness(.32) contrast(1.25);
+}
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  html[data-theme] .wiki-footer__relief:not(.has-static-fallback) .wiki-footer__relief-still { background-image: none; }
+}
+.wiki-footer__relief-canvas { display: block; width: 100%; height: 100%; opacity: 0; transition: opacity .6s ease; }
+.wiki-footer__relief.is-rendered .wiki-footer__relief-canvas { opacity: 1; }
+/* Thin veils are continuous with the stone, keeping the menu legible without panels. */
+.wiki-footer__relief::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,
+    rgba(var(--relief-paper), .93) 0%,
+    rgba(var(--relief-paper), .86) 30%,
+    rgba(var(--relief-paper), .30) 49%,
+    rgba(var(--relief-paper), .04) 64%,
+    rgba(var(--relief-paper), .82) 82%,
+    rgba(var(--relief-paper), .97) 100%);
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief > .container {
+  position: relative;
+  z-index: 1;
+  width: 92%;
+  max-width: 1680px;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__lead {
+  gap: 3rem;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__nav {
+  flex: 0 1 53%;
+  width: 53%;
+  gap: clamp(1rem, 3vw, 3.5rem);
+  grid-template-columns: .85fr .9fr 1.4fr;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief :is(p, .wiki-footer__team-name, .wiki-footer__team-detail, .wiki-footer__legal, .wiki-footer__contact, a) {
+  color: var(--relief-ink) !important;
+  text-shadow: none !important;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief :is(.wiki-footer__section-label, .wiki-footer__contact-label) {
+  color: var(--relief-accent) !important;
+  letter-spacing: .16em;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief :is(.wiki-footer__team-detail, .wiki-footer__legal) {
+  color: var(--relief-muted) !important;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__section-links a {
+  font-size: clamp(.88rem, 1.05vw, 1.08rem);
+  line-height: 1.5;
+  transition: color .2s, transform .3s;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief a:is(:hover, :focus-visible) {
+  color: var(--relief-accent) !important;
+  text-shadow: none !important;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief a::after {
+  background: var(--relief-accent);
+  box-shadow: none;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__section-links a:hover {
+  transform: translateX(4px);
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief a:focus-visible {
+  outline: 2px solid var(--relief-accent);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__signature {
+  margin-top: clamp(12rem, 23vw, 23rem);
+  background: var(--relief-line);
+}
+html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__legal { border-color: var(--relief-line); }
+html[data-theme="dark"] footer#wiki-footer.wiki-footer--relief .wiki-footer__crest img {
+  filter: grayscale(1) brightness(0) invert(.94);
+}
+@media (max-width: 1000px) {
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__lead { flex-direction: column; gap: 2.5rem; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__nav { width: 100%; flex-basis: auto; }
+  .wiki-footer__relief::after { background: linear-gradient(180deg, rgba(var(--relief-paper),.96), rgba(var(--relief-paper),.88) 48%, rgba(var(--relief-paper),.18) 67%, rgba(var(--relief-paper),.97) 88%); }
+}
+@media (max-width: 560px) {
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief { border-radius: 20px; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__nav { grid-template-columns: 1fr 1fr; gap: 2rem 1rem; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__nav-col:last-child { grid-column: 1 / -1; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__team-name { font-size: 1.25rem; letter-spacing: .08em; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__crest { width: 4.5rem; height: 4.5rem; }
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief .wiki-footer__team-detail { font-size: .58rem; }
+  .wiki-footer__relief-still { background-position: 65% center; }
+  .wiki-footer__relief::after { background: linear-gradient(180deg, rgba(var(--relief-paper),.97), rgba(var(--relief-paper),.91) 58%, rgba(var(--relief-paper),.22) 72%, rgba(var(--relief-paper),.98) 85%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme] body footer#wiki-footer.wiki-footer--relief a { transition: none; transform: none !important; }
+  .wiki-footer__relief-canvas { transition: none; }
+}
